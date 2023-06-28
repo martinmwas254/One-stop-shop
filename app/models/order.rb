@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
-  belongs_to :user
-
-  validates :user, presence: true
+    belongs_to :user
   
-end
+    validates :user, presence: true
+    
+  end
+  
