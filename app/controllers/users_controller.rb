@@ -1,37 +1,72 @@
 class UsersController < ApplicationController
-    protect_from_forgery with: :exception
-    # fetching all users
-    def index
-      users = User.all
-      render json: users
-    end
+  #  protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token,  only: [:create, :login, :logout, :loggedin_user]
   
-    # creating a new user 
-    def create
-      user = User.new(user_params)
-  
-      if user.save
-        render json: { success: "User created successfully" }, status: :created
-      else
-        render json: { error: user.errors.full_messages }, status: :unprocessable_entity
-      end
-    end
-  
-    # seeing a single user
-    def show
-      user = User.find_by(id: params[:id])
-  
-      if user
-        render json: user
-      else
-        render json: { error: "User not found" }, status: :not_found
-      end
-    end
-  
-    private
-  
-    def user_params
-      params.require(:user).permit(:username, :email, :password)
+  # before_action :authorize, only: [:create]
+  def loggedin_user
+    puts session[:user_id] # Check the value of session[:user_id]
+    user = User.find_by(id: session[:user_id])
+    if user
+      render json: user.slice(:id, :name, :email)
+    else
+      render json: { error: "Not logged in" }, status: :not_found
     end
   end
   
+    def login
+      name = params[:name]
+      password = params[:password]
+  
+      user = User.find_by(name: name)
+  
+      if user && user.authenticate(password)
+        session[:user_id] = user.id
+  
+        render json: { success: "Login success" }
+      else
+        render json: { error: "Wrong username/password" }
+      end
+    end
+
+
+    def logout
+        session.delete :user_id
+        render json: {success: "Logout success"}
+ 
+    end
+  
+   
+    
+
+  def index
+    users = User.all
+    render json: users
+  end
+
+  def create
+    user = User.new(user_params)
+
+    if user.save
+      render json: user, status: :created, only: [:id, :name, :email, :password]
+    else
+      render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  # showing a single user
+  def show
+    user = User.find_by(id: params[:id])
+
+    if user
+      render json: user, only: [:id, :name, :email, :password]
+    else
+      render json: { error: "User not found" }, status: :not_found
+    end
+  end
+
+  private
+
+  def user_params
+    params.permit(:name, :email, :password)
+  end
+end

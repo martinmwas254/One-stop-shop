@@ -10,9 +10,10 @@ function Layout() {
     <div>
         <Navbar/>
 
-
-        <Outlet/>
-        
+         <div className='mx-auto min-h-[85vh] container bg-gray-100 p-5'>
+          <Outlet/>
+         </div>
+       
 
         <Footer/>
         </div>
