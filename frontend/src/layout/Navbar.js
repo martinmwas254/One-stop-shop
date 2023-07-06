@@ -48,7 +48,7 @@ export default function Navbar() {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Profile
+                    {current_user && current_user.name}
                     </Link>
                     <ul className="dropdown-menu">
                       <li>

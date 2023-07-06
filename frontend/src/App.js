@@ -22,7 +22,7 @@ function App() {
         <Route path='register' element={<Register />} />
         <Route path='addblog' element={<AddProduct />} />
         <Route path='profile' element={<Profile />} />
-        <Route path='/book/:id' element={<Book />} />
+        <Route path='/product/:id' element={<Book />} />
       </Route>
     </Routes>
     </PostProvider>

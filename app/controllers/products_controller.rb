@@ -32,7 +32,18 @@ class ProductsController < ApplicationController
         render json: { error: "Product not found" }, status: :not_found
       end
     end
+     
+    def destroy
+      product = Product.find_by(id: params[:id])
   
+      if product
+        product.destroy
+        render json: { message: "Product deleted successfully" }
+      else
+        render json: { error: "Product not found" }, status: :not_found
+      end
+    end
+
     private
   
     def product_params

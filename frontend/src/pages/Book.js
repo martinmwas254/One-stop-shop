@@ -1,35 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { PostContext } from '../context/PostContext';
-import review from '../images/review.jpg';
 
 export default function Book() {
   const { id } = useParams();
-  const { books, deleteBook } = useContext(PostContext);
-  const [singleBook, setSingleBook] = useState({});
+  const { products, deleteproduct } = useContext(PostContext);
+  const [singleProduct, setSingleProduct] = useState({});
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    const book = books.find((book) => book.id === parseInt(id));
+    const product =products && products.find((product) => product.id === parseInt(id));
 
-    if (book) {
-      setSingleBook(book);
+    if (product) {
+      setSingleProduct(product);
       setReviews(reviews); // Set the reviews state with the reviews associated with the book
     }
-  }, [books, id]);
+  }, [products, id]);
 
   const handleDelete = () => {
-    deleteBook(singleBook.id);
+    deleteproduct(singleProduct.id);
   };
 
   return (
     <div className='container mx-auto'>
-      <h4>{singleBook.title}</h4>
+      <h4>{singleProduct.name}</h4>
       <div className='row gx-5'>
         <div className='col-lg-8 bg-light'>
-          <img src={singleBook.image_url} className='img-fluid' alt='image' />
+          <img src={singleProduct.image} className='img-fluid' alt='image' />
           <div className='d-flex mt-4 gap-5'>
-            <p>Author: {singleBook.author}</p>
+            <p>Author: {singleProduct.author}</p>
             
             <button className='btn btn-danger btn-sm' onClick={handleDelete}>Delete</button>
           </div>

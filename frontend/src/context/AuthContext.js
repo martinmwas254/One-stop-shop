@@ -23,7 +23,9 @@ export function AuthProvider({ children }) {
             'Error', 
             response.error, 'error');
         } else if (response.success) {
+          nav("/")
           Swal.fire('Success', response.success, 'success');
+          // set_currentUser()
           setonChange(!onChange)
 
         } else {
@@ -34,7 +36,7 @@ export function AuthProvider({ children }) {
             footer: '<a href="">Why do I have this issue?</a>'
           });
         }
-        console.log(response);
+        console.log(response); 
       });
   };
 
@@ -54,6 +56,21 @@ export function AuthProvider({ children }) {
         
       });
   };
+  
+     // Fetch current user
+        useEffect(() => {
+            console.log ("Error")
+            fetch("/api/current_user")
+            .then((res)=>res.json())
+            .then((response) => {
+                console.log ("current",response)
+            
+                set_currentUser(response);
+                
+                
+            });
+        }, [onChange]);
+     
 
   const contextData = {
     login,
@@ -61,19 +78,7 @@ export function AuthProvider({ children }) {
     logout
   };
 
-  useEffect(() => {
-    fetch("/api/current_user", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((response) => {
-        console.log(response);
-        if(response.currentUser){
-          set_currentUser(response.currentUser);
-        }
-      });
-  }, [onChange]);
+
 
   return (
     <AuthContext.Provider value={contextData}>

@@ -11,8 +11,8 @@ export function PostProvider({ children }) {
   const [reviews, setReviews ] = useState()
 
   // Deleting a book from the database
-  const deleteBook = (id) => {
-    fetch(`/books/delete/${id}`, {
+  const deleteProduct= (id) => {
+    fetch(`/products/delete/${id}`, {
       method: 'DELETE',
     })
       .then((res) => res.json())
@@ -52,7 +52,7 @@ export function PostProvider({ children }) {
       });
   };
 
-  // Adding a book
+  // Adding a product
   const AddProduct = (name, description, image,price , current_user) => {
     fetch('http://127.0.0.1:3000/products', {
       method: 'POST',
@@ -78,7 +78,7 @@ export function PostProvider({ children }) {
       });
   };
 
-  // Fetching books
+  // Fetching products
   useEffect(() => {
     fetch('products', {
       method: 'GET',

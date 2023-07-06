@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token,  only: [:create, :login, :logout, :loggedin_user]
   
   # before_action :authorize, only: [:create]
+  before_action :authorize, only: [:loggedin_user]
+
   def loggedin_user
     if @current_user
       render json: @current_user.slice(:id, :name, :email)

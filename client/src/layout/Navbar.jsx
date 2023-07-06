@@ -5,7 +5,7 @@ import { AuthContext } from '../context/AuthContext'
 export default function Navbar() 
 {
   const {current_user, logout} = useContext(AuthContext)
-  // console.log("User from Navbar", current_user)
+  console.log("User from Navbar", current_user)
 
   return (
  
@@ -38,7 +38,7 @@ export default function Navbar()
               {current_user && current_user ? (
                 <>
                   <li className="nav-item">
-                    <Link to="/addblog" className="nav-link active">
+                    <Link to="/addproduct" className="nav-link active">
                       Add Product
                     </Link>
                   </li>
@@ -51,12 +51,12 @@ export default function Navbar()
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      Profile
+                    {current_user && current_user.name}
                     </Link>
                     <ul className="dropdown-menu">
                       <li>
                         <a className="dropdown-item" href="#">
-                          {current_user.username}
+                          {current_user.name}
                         </a>
                       </li>
                       <li>
