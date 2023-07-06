@@ -10,7 +10,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-md bg-white mt-4">
         <div className="container">
           <a className="navbar-brand fw-bold mb-0 h1" href="#">
-            <h4>Book Reviews</h4>
+            <h4>ONE-STOP-SHOP</h4>
 
             
           </a>
