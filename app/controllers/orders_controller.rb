@@ -1,63 +1,73 @@
 class OrdersController < ApplicationController
-    # Placing a new order
-    protect_from_forgery with: :null_session
+  before_action :authorize
+  protect_from_forgery with: :null_session
 
-      def index
-        user = User.find(params[:user_id])
-        orders = user.orders.includes(:products)
-    
-        render json: orders, include: { products: { only: [:id, :name, :price] } }
-      end
+  def index
+    user = User.find(params[:user_id])
+    orders = user.orders.includes(:products)
 
-    
-    def create
-        order = Order.new(order_params)
-        order.total_price = calculate_total_price(order)
-    
-        if order.save
-          render json: order, status: :created
-        else
-          render json: { error: order.errors.full_messages }, status: :unprocessable_entity
-        end
-     end
+    render json: orders, include: { products: { only: [:id, :name, :price] } }
+  end
+
+  def create
+    user = @current_user
+    cart = user&.cart
   
-    # Retrieving a single order
-    def show
-      order = Order.find_by(id: params[:id])
+    if cart.nil? || cart.cart_items.empty?
+      render json: { error: "Cart is empty. Add products to the cart before placing an order." }, status: :unprocessable_entity
+      return
+    end
   
-      if order
-        render json: order, include: :order_items
-      else
-        render json: { error: "Order not found" }, status: :not_found
+    order = Order.new(user: user)
+    order.total_price = calculate_total_price(cart)
+  
+    if order.save
+      # Move cart items to order items
+      cart.cart_items.each do |cart_item|
+        order.order_items.create(product: cart_item.product, quantity: cart_item.quantity)
       end
-    end
   
-    # Cancelling an order
-    def destroy
-      order = Order.find_by(id: params[:id])
+      # Clear the cart after creating the order
+      cart.cart_items.destroy_all
   
-      if order
-        order.destroy
-        render json: { message: "Order cancelled successfully" }
-      else
-        render json: { error: "Order not found" }, status: :not_found
-      end
-    end
-  
-    private
-  
-    def order_params
-        params.permit(:user_id)
-    end
-    
-    def calculate_total_price(order)
-        total_price = 0
-    
-        order.order_items.each do |order_item|
-          total_price += order_item.product.price * order_item.quantity
-        end
-    
-        total_price
+      render json: order, status: :created
+    else
+      render json: { error: order.errors.full_messages }, status: :unprocessable_entity
     end
   end
   
+  def show
+    order = Order.find_by(id: params[:id])
+
+    if order
+      render json: order, include: :order_items
+    else
+      render json: { error: "Order not found" }, status: :not_found
+    end
+  end
+
+  def destroy
+    order = Order.find_by(id: params[:id])
+
+    if order
+      order.destroy
+      render json: { message: "Order cancelled successfully" }
+    else
+      render json: { error: "Order not found" }, status: :not_found
+    end
+  end
+
+  private
+  
+  
+
+  def calculate_total_price(cart)
+    total_price = 0
+
+    cart.cart_items.each do |cart_item|
+      total_price += cart_item.product.price * cart_item.quantity
+    end
+
+    total_price
+  end
+end

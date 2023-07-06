@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :cart_items, only: [:index, :create, :update, :destroy]
-  resources :orders, only: [:index, :create, :show]
+  resources :orders, only: [:index, :create, :show, :destroy]
 
   # Other routes for additional models or custom actions can be defined here
 end

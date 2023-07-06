@@ -1,5 +1,6 @@
-<<<<<<< HEAD
-class CartItemsController < ApplicationController
+sclass CartItemsController < ApplicationController
+
+before_action :authorize
     # Updating the quantity of a cart item
     protect_from_forgery with: :null_session
     def update
@@ -26,7 +27,6 @@ class CartItemsController < ApplicationController
     end
   end
   
-=======
 class CartsController < ApplicationController
   # Fetching the user's cart
   protect_from_forgery with: :null_session
@@ -78,4 +78,3 @@ class CartsController < ApplicationController
     end
   end
 end
->>>>>>> 9acc06a (added an admin)

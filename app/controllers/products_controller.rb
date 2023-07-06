@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
     before_action :authorize, except: :index
     protect_from_forgery with: :null_session
+    
   
     def index
       products = Product.all

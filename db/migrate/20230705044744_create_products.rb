@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.text :description
       t.decimal :price
       t.integer :quantity
+      t.string  :image
       t.references :user, null: false, foreign_key: true
 
       t.timestamps
