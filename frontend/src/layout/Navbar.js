@@ -110,7 +110,7 @@ export default function Navbar() {
                 </>
               ) : 
               <>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link to="/login" className="nav-link active">
                   Login
                 </Link>
@@ -119,7 +119,7 @@ export default function Navbar() {
                 <Link to="/register" className="nav-link active">
                   Register
                 </Link>
-              </li>
+              </li> */}
             </>
               }
             </ul>

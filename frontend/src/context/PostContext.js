@@ -25,8 +25,8 @@ export function PostProvider({ children }) {
   };
 
   // Adding a user
-  const AddUser = (name, password, email) => {
-    fetch('users/adduser', {
+  const register= (name, password, email) => {
+    fetch('users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, password, email }),
@@ -63,8 +63,8 @@ export function PostProvider({ children }) {
       .then((response) => {
         if (response.error) {
           Swal.fire('Error', response.error, 'error');
-        } else if (response.name) {
-          Swal.fire('Success', "save", 'success');
+        } else if (response.success) {
+          Swal.fire('Success', response.success, 'success');
           setOnChange(!onChange);
         } else {
           Swal.fire({
@@ -110,7 +110,7 @@ export function PostProvider({ children }) {
     products,
     
     AddProduct,
-    AddUser,
+    register,
   };
 
   return (

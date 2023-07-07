@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { AuthContext } from '../context/AuthContext';
+// import { AuthContext } from '../context/AuthContext';
+import { PostContext } from '../context/PostContext';
 
 export default function Register() {
-  const { register } = useContext(AuthContext);
+  const { register} = useContext(PostContext);
 
   // Setting state to store data
   const [name, setName] = useState('');
@@ -26,7 +27,7 @@ export default function Register() {
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <h2>Register Form</h2>
-          <label htmlFor="username" className="form-label">
+          <label htmlFor="name" className="form-label">
             Enter Your name
           </label>
           <input
