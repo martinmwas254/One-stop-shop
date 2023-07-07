@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 
 export default function Navbar() {
   const { current_user, logout } = useContext(AuthContext);
-
+console.log("", current_user)
   return (
     <div>
       <nav className="navbar navbar-expand-md bg-white mt-4">
@@ -30,7 +30,7 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
-              {current_user ? (
+              {current_user && current_user.name ? (
                 <>
                   <li className="nav-item">
                     <Link to="/addblog" className="nav-link active">
@@ -83,45 +83,10 @@ export default function Navbar() {
                 </li>
               </>
             )}
-                <>
-                  <li className="nav-item">
-                    <Link to="/login" className="nav-link active">
-                      Login
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/register" className="nav-link active">
-                      Register
-                    </Link>
-                  </li>
-                </>
-              {!current_user || Object.keys(current_user).length === 0 ? (
-                <>
-                  <li className="nav-item">
-                    <Link to="/login" className="nav-link active">
-                      Login
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="/register" className="nav-link active">
-                      Register
-                    </Link>
-                  </li>
-                </>
-              ) : 
-              <>
-              {/* <li className="nav-item">
-                <Link to="/login" className="nav-link active">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/register" className="nav-link active">
-                  Register
-                </Link>
-              </li> */}
-            </>
-              }
+   
+            
+
+              
             </ul>
           </div>
         </div>

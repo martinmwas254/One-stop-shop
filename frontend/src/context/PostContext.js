@@ -11,8 +11,8 @@ export function PostProvider({ children }) {
   const [reviews, setReviews ] = useState()
 
   // Deleting product from the database
-  const deleteProduct= (id) => {
-    fetch(`/products/delete/${id}`, {
+  const deleteproduct= (id) => {
+    fetch(`/products/${id}`, {
       method: 'DELETE',
     })
       .then((res) => res.json())
@@ -33,10 +33,11 @@ export function PostProvider({ children }) {
     })
       .then((res) => res.json())
       .then((response) => {
+        console.log("", response)
         if (response.error) {
           Swal.fire('Error', response.error, 'error');
           nav("/")
-        } else if (response.success) {
+        } else if (response.name) {
           Swal.fire('Success', response.success, 'success');
           setOnChange(!onChange);
           nav("/")
@@ -62,7 +63,8 @@ export function PostProvider({ children }) {
       .then((res) => res.json())
       .then((response) => {
         if (response.error) {
-          Swal.fire('Error', response.error, 'error');
+          Swal.fire('Error', 
+            response.error, 'error');
         } else if (response.success) {
           Swal.fire('Success', response.success, 'success');
           setOnChange(!onChange);
@@ -108,7 +110,7 @@ export function PostProvider({ children }) {
 
   const contextData = {
     products,
-    
+    deleteproduct,
     AddProduct,
     register,
   };

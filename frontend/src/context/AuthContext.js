@@ -60,7 +60,7 @@ export function AuthProvider({ children }) {
   
      // Fetch current user
         useEffect(() => {
-            console.log ("Error")
+            
             fetch("/api/current_user")
             .then((res)=>res.json())
             .then((response) => {
@@ -71,7 +71,8 @@ export function AuthProvider({ children }) {
                 
             });
         }, [onChange]);
-
+        
+        console.log ("Error", current_user)
         
      
 
