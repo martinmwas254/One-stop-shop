@@ -63,8 +63,8 @@ export function PostProvider({ children }) {
       .then((response) => {
         if (response.error) {
           Swal.fire('Error', response.error, 'error');
-        } else if (response.success) {
-          Swal.fire('Success', response.success, 'success');
+        } else if (response.name) {
+          Swal.fire('Success', "save", 'success');
           setOnChange(!onChange);
         } else {
           Swal.fire({

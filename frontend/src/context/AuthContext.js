@@ -41,8 +41,9 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    fetch("/api/current_user", {
-      method: "POST",
+    // console.log
+    fetch("/api/logout", {
+      method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())

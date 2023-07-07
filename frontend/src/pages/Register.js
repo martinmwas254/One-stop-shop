@@ -5,7 +5,7 @@ export default function Register() {
   const { register } = useContext(AuthContext);
 
   // Setting state to store data
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [id, setId] = useState('');
   const [email, setEmail] = useState('');
@@ -13,12 +13,12 @@ export default function Register() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(username);
+    console.log(name);
     console.log(password);
     console.log(email);
     console.log(id);
 
-    register(username, password, email, id);
+    register(name, password, email, id);
   }
 
   return (
@@ -27,13 +27,13 @@ export default function Register() {
         <div className="mb-3">
           <h2>Register Form</h2>
           <label htmlFor="username" className="form-label">
-            Enter Your Username
+            Enter Your name
           </label>
           <input
             type="text"
             className="form-control"
-            id="username"
-            onChange={(e) => setUsername(e.target.value)}
+            id="name"
+            onChange={(e) => setName(e.target.value)}
             aria-describedby="emailHelp"
           />
         </div>

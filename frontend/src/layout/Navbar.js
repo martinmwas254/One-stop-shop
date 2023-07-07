@@ -82,6 +82,14 @@ export default function Navbar() {
                       Login
                     </Link>
                   </li>
+                  <li>
+                  <Link
+                    to="/profile"
+                    className="nav-item"
+                  >
+                    Profile
+                  </Link>
+                </li>
                   <li className="nav-item">
                     <Link to="/register" className="nav-link active">
                       Register
