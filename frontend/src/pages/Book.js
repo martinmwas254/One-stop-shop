@@ -48,7 +48,7 @@ export default function Book() {
               <button className='btn btn-success btn-sm'>Edit</button>
               </div>
               <button type='submit' className='btn btn-success w-100'>
-                Submit
+                add to cart
               </button>
             </form>
           </div>

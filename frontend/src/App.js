@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import { AuthProvider } from './context/AuthContext';
 import { PostProvider } from './context/PostContext';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='addblog' element={<AddProduct />} />
         <Route path='profile' element={<Profile />} />
         <Route path='/product/:id' element={<Book />} />
+        <Route path='' element={<Cart />} />
       </Route>
     </Routes>
     </PostProvider>
