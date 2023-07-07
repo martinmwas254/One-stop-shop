@@ -11,10 +11,6 @@ export default function AddProduct() {
   const [image, setImage]  = useState()
   const [description, setDescription]  = useState()
   const [price, setPrice]  = useState()
- 
-  
-
-  
 
   function handleSubmit(e){
     e.preventDefault()
@@ -30,7 +26,7 @@ export default function AddProduct() {
     <div className="container" style={{ minHeight: "70vh" }}>
       {current_user ? (
         <>
-          <h3>Add Book Review</h3>
+          <h3>Add Product</h3>
           <div className="row h-full">
             <div className="col-md-6">
               <img src={book} className="img-fluid" alt="Edit" />
@@ -48,7 +44,7 @@ export default function AddProduct() {
                   />
                 </div>
                 <div className="form-group mt-3">
-                  <label htmlFor="exampleInputEmailm1">Author</label>
+                  <label htmlFor="exampleInputEmailm1">Price</label>
                   <input
                     type="text"
                     onChange={(e) => setPrice(e.target.value)}
@@ -86,7 +82,7 @@ export default function AddProduct() {
           </div>
         </>
       ) : (
-        <div>"Login in order to add your book review"</div>
+        <div>"Login in order to add your product review"</div>
       )}
     </div>
   );

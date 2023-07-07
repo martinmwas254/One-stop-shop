@@ -10,7 +10,7 @@ export function PostProvider({ children }) {
   const [products, setProducts] = useState();
   const [reviews, setReviews ] = useState()
 
-  // Deleting a book from the database
+  // Deleting product from the database
   const deleteProduct= (id) => {
     fetch(`/products/delete/${id}`, {
       method: 'DELETE',
@@ -54,7 +54,7 @@ export function PostProvider({ children }) {
 
   // Adding a product
   const AddProduct = (name, description, image,price , current_user) => {
-    fetch('http://127.0.0.1:3000/products', {
+    fetch('/products', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, description, image, price, current_user }),
