@@ -9,11 +9,9 @@ export default function Navbar() {
     <div>
       <nav className="navbar navbar-expand-md bg-white mt-4">
         <div className="container">
-          <a className="navbar-brand fw-bold mb-0 h1" href="#">
-            <h4>ONE-STOP-SHOP</h4>
-
-            
-          </a>
+          <Link to="/" className="navbar-brand fw-bold mb-0 h1">
+            ONE-STOP-SHOP
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -32,7 +30,7 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
-              {current_user && current_user ? (
+              {current_user ? (
                 <>
                   <li className="nav-item">
                     <Link to="/addblog" className="nav-link active">
@@ -43,17 +41,16 @@ export default function Navbar() {
                     <Link
                       to="/profile"
                       className="nav-link active dropdown-toggle"
-                      href="#"
                       role="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                    {current_user && current_user.name}
+                      {current_user.name}
                     </Link>
                     <ul className="dropdown-menu">
                       <li>
                         <a className="dropdown-item" href="#">
-                          {current_user.username}
+                          {current_user.name}
                         </a>
                       </li>
                       <li>
@@ -65,10 +62,7 @@ export default function Navbar() {
                         <hr className="dropdown-divider" />
                       </li>
                       <li>
-                        <a
-                          className="dropdown-item"
-                          onClick={() => logout()}
-                        >
+                        <a className="dropdown-item" onClick={() => logout()}>
                           Logout
                         </a>
                       </li>
@@ -77,26 +71,57 @@ export default function Navbar() {
                 </>
               ) : (
                 <>
+                <li className="nav-item">
+                  <Link to="/login" className="nav-link active">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/register" className="nav-link active">
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
+                <>
                   <li className="nav-item">
                     <Link to="/login" className="nav-link active">
                       Login
                     </Link>
                   </li>
-                  <li>
-                  <Link
-                    to="/profile"
-                    className="nav-item"
-                  >
-                    Profile
-                  </Link>
-                </li>
                   <li className="nav-item">
                     <Link to="/register" className="nav-link active">
                       Register
                     </Link>
                   </li>
                 </>
-              )}
+              {!current_user || Object.keys(current_user).length === 0 ? (
+                <>
+                  <li className="nav-item">
+                    <Link to="/login" className="nav-link active">
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/register" className="nav-link active">
+                      Register
+                    </Link>
+                  </li>
+                </>
+              ) : 
+              <>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link active">
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/register" className="nav-link active">
+                  Register
+                </Link>
+              </li>
+            </>
+              }
             </ul>
           </div>
         </div>
