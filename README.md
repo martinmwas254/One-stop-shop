@@ -2,9 +2,9 @@
 
 #### Thursday, July 03  2023
 #### Contributors 
-**Benayah Wanyoike**
-**Charles Onguti**
-**Martin Mwangi**
+-**Benayah Wanyoike**
+-**Charles Onguti**
+-**Martin Mwangi**
 
                 
 ## Description
