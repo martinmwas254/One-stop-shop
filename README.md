@@ -1,14 +1,14 @@
 # One-Stop-Shop
 
 #### Thursday, July 03  2023
+
+## Description
+One-Stop-Shop where a user can register and login to view products being sold and click on them to see more details about the product.
+
 #### Contributors 
 - Benayah Wanyoike
 - Charles Onguti
 - Martin Mwangi
-
-                
-## Description
-One-Stop-Shop where a user can register and login to view products being sold and click on them to see more details about the product.
 
 ## Setup/Installation Requirements
 * An internet connection.
